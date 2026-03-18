@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+
+  <!-- Google Fonts: Playfair Display + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Background Particles -->
+  <div class="bg-particles" aria-hidden="true">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+
+  <!--  MAIN CARD   -->
+  <main class="converter-wrapper" role="main">
+
+    <!-- Header -->
+    <header class="card-header">
+      <div class="logo-badge">
+        <i class="fa-solid fa-coins"></i>
+      </div>
+      <h1 class="title">Currency <span class="accent">Converter</span></h1>
+      <p class="subtitle">Real-time exchange rates, worldwide</p>
+    </header>
+
+    <!-- Converter Card -->
+    <section class="card" aria-label="Currency conversion form">
+
+      <!-- ---- Amount Input ---- -->
+      <div class="field-group" id="amount-group">
+        <label for="amount" class="field-label">
+          <i class="fa-solid fa-coins label-icon"></i> Amount
+        </label>
+        <div class="input-wrap">
+          <input
+            type="number"
+            id="amount"
+            class="field-input"
+            placeholder="Enter amount"
+            value="1"
+            min="0"
+            step="any"
+            autocomplete="off"
+            aria-describedby="amount-error"
+          />
+        </div>
+        <span class="error-msg" id="amount-error" role="alert"></span>
+      </div>
+
+      <!-- ---- Currency Row ---- -->
+      <div class="currency-row">
+
+        <!-- From Currency -->
+        <div class="field-group flex-1">
+          <label for="from-currency" class="field-label">
+            <i class="fa-solid fa-arrow-right-from-bracket label-icon"></i> From
+          </label>
+          <div class="select-wrap">
+            <select id="from-currency" class="field-select" aria-label="From currency"></select>
+            <i class="fa-solid fa-chevron-down select-arrow" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <!-- Swap Button -->
+        <div class="swap-col">
+          <button class="swap-btn" id="swap-btn" title="Swap currencies" aria-label="Swap currencies">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          </button>
+        </div>
+
+        <!-- To Currency -->
+        <div class="field-group flex-1">
+          <label for="to-currency" class="field-label">
+            <i class="fa-solid fa-arrow-right-to-bracket label-icon"></i> To
+          </label>
+          <div class="select-wrap">
+            <select id="to-currency" class="field-select" aria-label="To currency"></select>
+            <i class="fa-solid fa-chevron-down select-arrow" aria-hidden="true"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ---- Convert Button ---- -->
+      <button class="convert-btn" id="convert-btn" aria-live="polite">
+        <span class="btn-text">
+          <i class="fa-solid fa-rotate btn-icon"></i> Convert
+        </span>
+        <!-- Loading spinner (hidden by default) -->
+        <span class="btn-loading" aria-hidden="true">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Fetching rates…
+        </span>
+      </button>
+
+      <!-- ---- Result Panel ---- -->
+      <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+        <!-- Filled dynamically by JS -->
+      </div>
+
+      <!-- ---- Rate Info Bar ---- -->
+      <div class="rate-bar" id="rate-bar">
+        <!-- Filled dynamically by JS -->
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="card-footer">
+      <p>Powered by <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a></p>
+    </footer>
+
+  </main>
+
+  <script src="style.js"></script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+/* =============================================================
+   CURRENCY CONVERTER — style.css
+   Theme  : Luxury Dark (Deep Navy + Gold)
+   Fonts  : Playfair Display (headings) · DM Sans (body)
+   ============================================================= */
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --navy-950: #080d1a;
+  --navy-900: #0c1225;
+  --navy-800: #111a35;
+  --navy-700: #000000;
+  --navy-600: #5666a5;
+
+  --gold-400: #f0c040;
+  --gold-500: #d4a017;
+  --gold-300: #a1997c;
+  --gold-glow: rgba(212, 160, 23, 0.35);
+
+  --text-primary: #f0ece0;
+  --text-secondary: #9ba3b8;
+  --text-muted: #5a6480;
+
+  --border-subtle: rgba(240, 192, 64, 0.12);
+  --border-focus : rgba(240, 192, 64, 0.55);
+
+  --error-color: #f07070;
+  --success-bg : rgba(212, 160, 23, 0.08);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset / Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  background: var(--navy-950);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 2rem 1rem;
+}
+
+/* ── Background Animated Particles ─────────────────────────── */
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-particles span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: var(--gold-400);
+  opacity: 0;
+  animation: floatParticle linear infinite;
+}
+
+/* Individual particle sizes, positions, delays */
+.bg-particles span:nth-child(1) {
+  width: 6px; height: 6px;
+  left: 10%; top: 80%;
+  animation-duration: 18s;
+  animation-delay: 0s;
+}
+.bg-particles span:nth-child(2) {
+  width: 4px; height: 4px;
+  left: 30%; top: 90%;
+  animation-duration: 24s;
+  animation-delay: 4s;
+}
+.bg-particles span:nth-child(3) {
+  width: 8px; height: 8px;
+  left: 55%; top: 85%;
+  animation-duration: 20s;
+  animation-delay: 2s;
+}
+.bg-particles span:nth-child(4) {
+  width: 5px; height: 5px;
+  left: 72%; top: 92%;
+  animation-duration: 26s;
+  animation-delay: 6s;
+}
+.bg-particles span:nth-child(5) {
+  width: 3px; height: 3px;
+  left: 88%; top: 78%;
+  animation-duration: 16s;
+  animation-delay: 1s;
+}
+.bg-particles span:nth-child(6) {
+  width: 7px; height: 7px;
+  left: 45%; top: 95%;
+  animation-duration: 22s;
+  animation-delay: 8s;
+}
+
+@keyframes floatParticle {
+  0%   { transform: translateY(0)   rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.35; }
+  90%  { opacity: 0.15; }
+  100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── Wrapper ────────────────────────────────────────────────── */
+.converter-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 540px;
+  animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Card Header ────────────────────────────────────────────── */
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeSlideUp 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+  box-shadow: 0 0 30px var(--gold-glow), 0 4px 16px rgba(0,0,0,0.4);
+  font-size: 1.6rem;
+  color: var(--navy-950);
+  margin-bottom: 1rem;
+  animation: pulseBadge 3s ease-in-out infinite;
+}
+
+@keyframes pulseBadge {
+  0%, 100% { box-shadow: 0 0 30px var(--gold-glow), 0 4px 16px rgba(0,0,0,0.4); }
+  50%       { box-shadow: 0 0 55px rgba(212, 160, 23, 0.6), 0 4px 20px rgba(0,0,0,0.5); }
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.title .accent {
+  color: var(--gold-400);
+  font-style: italic;
+}
+
+.subtitle {
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+/* ── Main Card ──────────────────────────────────────────────── */
+.card {
+  background: linear-gradient(160deg, var(--navy-800) 0%, var(--navy-900) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 5vw, 2.4rem);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 80px rgba(212, 160, 23, 0.05);
+  animation: fadeSlideUp 0.7s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Field Group ────────────────────────────────────────────── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+.field-group.flex-1 { flex: 1; margin-bottom: 0; }
+
+.field-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.label-icon {
+  color: var(--gold-500);
+  font-size: 0.75rem;
+  margin-right: 2px;
+}
+
+/* ── Text Input ─────────────────────────────────────────────── */
+.input-wrap { position: relative; }
+
+.field-input {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background: var(--navy-700);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  outline: none;
+  /* transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  -moz-appearance: textfield; */
+}
+.field-input::-webkit-outer-spin-button,
+.field-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.field-input::placeholder { color: var(--text-muted); font-weight: 300; }
+
+.field-input:hover {
+  border-color: rgba(240, 192, 64, 0.25);
+  background: rgba(25, 36, 74, 0.8);
+}
+.field-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.12), 0 2px 10px rgba(0,0,0,0.3);
+  background: var(--navy-700);
+}
+
+.field-input.error {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 3px rgba(240, 112, 112, 0.12);
+  animation: shake 0.38s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90%  { transform: translateX(-2px); }
+  20%, 80%  { transform: translateX(4px);  }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60%  { transform: translateX(4px);  }
+}
+
+.error-msg {
+  font-size: 0.78rem;
+  color: var(--error-color);
+  min-height: 1rem;
+  transition: opacity var(--transition);
+}
+
+/* ── Currency Row ───────────────────────────────────────────── */
+.currency-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 1.6rem;
+}
+
+/* ── Select Dropdown ────────────────────────────────────────── */
+.select-wrap {
+  position: relative;
+}
+
+.field-select {
+  width: 100%;
+  padding: 0.85rem 2.4rem 0.85rem 1rem;
+  background: var(--navy-700);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 500;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.field-select:hover  { border-color: rgba(240, 192, 64, 0.25); }
+.field-select:focus  {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.12);
+}
+
+/* Custom arrow */
+.select-arrow {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold-500);
+  font-size: 0.7rem;
+  pointer-events: none;
+  transition: transform var(--transition);
+}
+.select-wrap:focus-within .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* ── Swap Button ────────────────────────────────────────────── */
+.swap-col {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0;
+  flex-shrink: 0;
+}
+
+.swap-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-subtle);
+  background: var(--navy-700);
+  color: var(--gold-400);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.swap-btn:hover {
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+  color: var(--navy-950);
+  border-color: transparent;
+  box-shadow: 0 0 20px var(--gold-glow);
+  transform: scale(1.08);
+}
+
+.swap-btn:active { transform: scale(0.95) rotate(180deg); }
+
+/* Swap spin animation */
+.swap-btn.spinning i {
+  animation: spinOnce 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes spinOnce {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(180deg); }
+}
+
+/* ── Convert Button ─────────────────────────────────────────── */
+.convert-btn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-400) 50%, var(--gold-300) 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  color: var(--navy-950);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(212, 160, 23, 0.3);
+}
+
+.convert-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.convert-btn:hover {
+  background-position: 100% 50%;
+  box-shadow: 0 6px 30px rgba(212, 160, 23, 0.5);
+  transform: translateY(-2px);
+}
+.convert-btn:hover::before { transform: scaleX(1); }
+.convert-btn:active { transform: translateY(0); }
+
+/* Button states */
+.btn-loading { display: none; align-items: center; gap: 0.5rem; justify-content: center; }
+.btn-text    { display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
+.btn-icon    { transition: transform 0.4s ease; }
+.convert-btn:hover .btn-icon { transform: rotate(180deg); }
+
+/* Loading state on button */
+.convert-btn.loading .btn-text    { display: none; }
+.convert-btn.loading .btn-loading { display: flex; }
+.convert-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Result Panel ───────────────────────────────────────────── */
+.result-panel {
+  margin-top: 1.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  max-height: 0;
+  opacity: 0;
+}
+
+.result-panel.visible {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.result-inner {
+  background: var(--success-bg);
+  border: 1px solid rgba(212, 160, 23, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.6rem;
+  text-align: center;
+  animation: popIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.result-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.result-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 700;
+  color: var(--gold-400);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  /* Number count-up animation via CSS — JS will set this */
+  transition: color 0.3s;
+}
+
+.result-currency {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+  font-weight: 300;
+}
+
+/* Error state in result */
+.result-panel.error-state .result-inner {
+  background: rgba(240, 112, 112, 0.08);
+  border-color: rgba(240, 112, 112, 0.3);
+}
+.result-panel.error-state .result-amount {
+  color: var(--error-color);
+  font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Rate Info Bar ──────────────────────────────────────────── */
+.rate-bar {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rate-bar.visible {
+  max-height: 80px;
+  opacity: 1;
+}
+
+.rate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding: 0.2rem 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.rate-row .rate-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.rate-row .rate-badge {
+  background: rgba(212, 160, 23, 0.12);
+  color: var(--gold-400);
+  border-radius: 100px;
+  padding: 0.12rem 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ── Card Footer ────────────────────────────────────────────── */
+.card-footer {
+  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  animation: fadeSlideUp 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.card-footer a {
+  color: var(--gold-500);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.card-footer a:hover { color: var(--gold-400); text-decoration: underline; }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .currency-row { flex-direction: column; gap: 1rem; }
+
+  .swap-col {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .swap-btn {
+    width: 40px;
+    height: 40px;
+    transform: rotate(90deg);
+  }
+  .swap-btn:hover { transform: rotate(90deg) scale(1.08); }
+
+  .field-group.flex-1 { margin-bottom: 0; }
+}
