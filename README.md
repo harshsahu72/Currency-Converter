@@ -30,3 +30,7 @@ CSS3 – Styling & Animations
 JavaScript (Vanilla JS) – Logic & API handling
 
 ExchangeRate API – Real-time currency data
+
+**Harsh Kumar**
+ | Student
+ << Working on Frontend Designing
